@@ -78,9 +78,9 @@ struct TestView: View {
 //            }
 //        }
         
-        List(myList, id: \.self) { item in
-            Text(item)
-        }
+//        List(myList, id: \.self) { item in
+//            Text(item)
+//        }
         
     }
 }
