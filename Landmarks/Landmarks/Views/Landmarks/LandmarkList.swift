@@ -16,7 +16,7 @@ struct LandmarkList: View {
             (!showFavoritesOnly || landmark.isFavorite)
         }
     }
-    
+     
     var body: some View {
         NavigationView {
             List {
