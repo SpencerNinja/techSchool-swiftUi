@@ -8,11 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
-    var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
-    @State var emojiCount = 20
+    @State var themeColor: Color = .red
+    @State var emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
+    @State var emojiCount = 24
     
     var body: some View {
         VStack {
+            Text("Memorize!")
+                .font(.title)
+                .foregroundColor(themeColor)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                     ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
@@ -24,33 +28,65 @@ struct ContentView: View {
             .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
             Spacer()
             HStack {
-                remove
+                batman
                 Spacer()
-                add
+                tmnt
+                Spacer()
+                vehicles
+//                remove
+//                Spacer()
+//                add
             }
-            .font(.largeTitle)
+            .font(.footnote)
             .padding(.horizontal)
         }
         .padding(.horizontal)
     }
-    var remove: some View {
+    var batman: some View {
         Button {
-            if emojiCount > 1 {
-                emojiCount -= 1
-            }
+            themeColor = .gray
+            emojis = ["🦇", "🤡", "♦️", "🥶", "🐈‍⬛", "🐧", "🎭", "🥷🏼", "🌿", "💰", "🐦", "😱", "👊"]
+            emojiCount = emojis.count
         } label: {
-            Image(systemName: "minus.circle")
+            Text("BATMAN")
         }
     }
-    var add: some View {
+    var tmnt: some View {
         Button {
-            if emojiCount < emojis.count {
-                emojiCount += 1
-            }
+            themeColor = .green
+            emojis = ["🐢", "🐀", "🍕", "🧪", "🥷🏼", "⚔️", "🚃", "🏒", "✦"]
+            emojiCount = emojis.count
         } label: {
-            Image(systemName: "plus.circle")
+            Text("TMNT")
         }
     }
+    var vehicles: some View {
+        Button {
+            themeColor = .red
+            emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
+            emojiCount = emojis.count
+        } label: {
+            Text("VEHICLES")
+        }
+    }
+//    var remove: some View {
+//        Button {
+//            if emojiCount > 1 {
+//                emojiCount -= 1
+//            }
+//        } label: {
+//            Image(systemName: "minus.circle")
+//        }
+//    }
+//    var add: some View {
+//        Button {
+//            if emojiCount < emojis.count {
+//                emojiCount += 1
+//            }
+//        } label: {
+//            Image(systemName: "plus.circle")
+//        }
+//    }
 }
 
 struct CardView: View {
