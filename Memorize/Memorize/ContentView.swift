@@ -19,13 +19,13 @@ struct ContentView: View {
                 .foregroundColor(themeColor)
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
+                    ForEach(emojis[0..<emojiCount].shuffled(), id: \.self) { emoji in
                         CardView(content: emoji)
                             .aspectRatio(2/3, contentMode: .fit)
                     }
                 }
             }
-            .foregroundColor(/*@START_MENU_TOKEN@*/.red/*@END_MENU_TOKEN@*/)
+            .foregroundColor(themeColor)
             Spacer()
             HStack {
                 batman
@@ -48,7 +48,10 @@ struct ContentView: View {
             emojis = ["🦇", "🤡", "♦️", "🥶", "🐈‍⬛", "🐧", "🎭", "🥷🏼", "🌿", "💰", "🐦", "😱", "👊"]
             emojiCount = emojis.count
         } label: {
-            Text("BATMAN")
+            VStack {
+                Text("BATMAN")
+                Image(systemName: "figure.walk")
+            }
         }
     }
     var tmnt: some View {
@@ -57,7 +60,10 @@ struct ContentView: View {
             emojis = ["🐢", "🐀", "🍕", "🧪", "🥷🏼", "⚔️", "🚃", "🏒", "✦"]
             emojiCount = emojis.count
         } label: {
-            Text("TMNT")
+            VStack {
+                Text("TMNT")
+                Image(systemName: "tortoise.fill")
+            }
         }
     }
     var vehicles: some View {
@@ -66,7 +72,10 @@ struct ContentView: View {
             emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
             emojiCount = emojis.count
         } label: {
-            Text("VEHICLES")
+            VStack {
+                Text("VEHICLES")
+                Image(systemName: "car.fill")
+            }
         }
     }
 //    var remove: some View {
