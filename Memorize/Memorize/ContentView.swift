@@ -42,6 +42,7 @@ struct ContentView: View {
         }
         .padding(.horizontal)
     }
+    
     var batman: some View {
         Button {
             themeColor = .gray
@@ -78,6 +79,7 @@ struct ContentView: View {
             }
         }
     }
+    
 //    var remove: some View {
 //        Button {
 //            if emojiCount > 1 {
