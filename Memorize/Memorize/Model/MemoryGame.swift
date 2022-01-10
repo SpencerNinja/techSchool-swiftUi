@@ -35,15 +35,6 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         print("\(cards)")
     }
     
-//    func index(of card: Card) -> Int? {
-//        for index in 0..<cards.count {
-//            if cards[index].id == card.id {
-//                return index
-//            }
-//        }
-//        return nil
-//    }
-    
     init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
         cards = Array<Card>()
         // add numberOfPairsOfCards x 2 cards to cards array
