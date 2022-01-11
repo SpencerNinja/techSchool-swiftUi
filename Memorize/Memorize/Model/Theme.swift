@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Theme {
+struct Theme: Identifiable {
+    var id = UUID().uuidString
     var name: String = ""
     var emojis: [String] = []
     var pairsOfCards: Int = 0

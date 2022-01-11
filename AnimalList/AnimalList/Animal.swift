@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Animal: Identifiable {
+struct Animal: Identifiable, Hashable {
     var id = UUID().uuidString
     let name: String
     let sound: String

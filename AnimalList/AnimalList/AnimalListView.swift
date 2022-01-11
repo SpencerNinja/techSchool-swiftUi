@@ -14,27 +14,44 @@ struct AnimalListView: View {
     var body: some View {
         List {
             ForEach(vm.animals) { animal in
-                ZStack {
-                    HStack {
-                        VStack {
-                            Text(animal.name)
-                        }
-                        .padding()
-                        Spacer()
-                        VStack {
-                            Text(animal.isMammal ? "Yes" : "No")
-                        }
-                        .padding()
+                ListItemView(animal: animal)
+                
+            }
+            .onDelete(perform: deleteAnimal)
+        }
+        .listStyle(InsetListStyle())
+    }
+    
+    func deleteAnimal(indexSet: IndexSet) {
+        vm.animals.remove(atOffsets: indexSet)
+    }
+}
+
+extension AnimalListView {
+    struct ListItemView: View {
+        let animal: Animal
+        var body: some View {
+            ZStack {
+                HStack {
+                    VStack {
+                        Text(animal.name)
+                            .font(.headline)
                     }
-                    .background(.red)
+                    .padding()
+                    Spacer()
+                    VStack {
+                        Image(systemName: animal.isMammal ? "checkmark" : "x.square")
+                    }
+                    .padding()
                 }
-                .frame(height: 60)
-                .frame(maxWidth: .infinity)
-                .background(.blue)
-                .cornerRadius(15)
-                onTapGesture {
-                    print(animal.sound)
-                }
+                .background(animal.isMammal ? Color.green : Color.red)
+            }
+            .frame(maxWidth: .infinity)
+            .background(.blue)
+            .cornerRadius(15)
+            .shadow(color: .black, radius: 10, x: 5, y: 5)
+            .onTapGesture {
+                print(animal.sound)
             }
         }
     }
