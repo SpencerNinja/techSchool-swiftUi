@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var viewModel: EmojiMemoryGame
+    @StateObject var viewModel = EmojiMemoryGame()
     var body: some View {
         ScrollView {
+            Text(viewModel.theme.name)
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                 ForEach(viewModel.cards) { card in
                     CardView(card: card)
@@ -20,10 +21,7 @@ struct ContentView: View {
                         }
                 }
             }
-            Button("New Game") {
-                viewModel.setTheme()
-                createMemoryGame()
-            }
+            Button("New Game") {}
         }
         .foregroundColor(.red)
         .padding(.horizontal)
