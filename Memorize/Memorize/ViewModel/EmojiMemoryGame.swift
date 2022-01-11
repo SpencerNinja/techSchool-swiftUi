@@ -9,49 +9,55 @@ import SwiftUI
 
 class EmojiMemoryGame: ObservableObject {
     
-    var themeChoice: ThemeChoice = .batman
     @State var theme: Theme = Theme()
-    enum ThemeChoice {
-        case batman, tmnt, vehicles, holiday, harry, flags
-    }
     
-    func setTheme() {
-        switch themeChoice {
-        case .batman:
-            theme.name = "BATMAN"
-            theme.emojis = ["🦇", "🤡", "♦️", "🥶", "🐈‍⬛", "🐧", "🎭", "🥷🏼", "🌿", "💰", "🐦", "😱", "👊"]
-            theme.pairsOfCards = 13
-            theme.color = "#444444"
-        case .tmnt:
-            theme.name = "TMNT"
-            theme.emojis = ["🐢", "🐀", "🍕", "🧪", "🥷🏼", "⚔️", "🚃", "🏒", "✦"]
-            theme.pairsOfCards = 9
-            theme.color = "#00FF00"
-        case .vehicles:
-            theme.name = "VEHICLES"
-            theme.emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
-            theme.pairsOfCards = 24
-            theme.color = "#0000FF"
-        case .holiday:
-            theme.name = "HOLIDAYS"
-            theme.emojis = ["🎉", "🎊", "🎁", "🎄", "🎃", "🎅🏻", "🎎", "🪔", "🧑🏼‍🎄", "🤶🏾"]
-            theme.pairsOfCards = 10
-            theme.color = "#FF0000"
-        case .harry:
-            theme.name = "HARRY POTTER"
-            theme.emojis = ["🧙🏼‍♀️", "🧙🏼", "🧙‍♂️", "🪄", "🚂", "🐍", "🏆", "🧹", "🐈‍⬛", "🐀", "🐺", "🦉", "🦄", "🐉", "🧪", "🕷", "🏰"]
-            theme.pairsOfCards = 17
-            theme.color = "#FFFF00"      // gold, marroon, green, blue, yellow
-        case .flags:
-            theme.name = "FLAGS"
-            theme.emojis = ["🏴‍☠️", "🏴", "🇺🇳", "🇦🇺", "🇧🇸", "🇦🇹", "🇨🇷", "🇪🇪", "🇯🇵", "🇹🇹", "🇺🇸", "🇾🇪", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "🇬🇧", "🇰🇼", "🇳🇴", "🇸🇦", "🇸🇩", "🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇹🇭", "🇰🇷", "🇷🇺", "🇩🇪", "🇫🇷", "🇨🇳", "🇨🇦", "🇲🇽", "🇵🇭", "🇮🇪", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "🇪🇸"]
-            theme.pairsOfCards = 28       // actually 31
-            theme.color = "#800080"
+    init() {
+        let availableThemes: [ThemeChoice] = [.batman, .tmnt, .vehicles, .holiday, .harry, .flags]
+        let themeChoice: ThemeChoice = availableThemes.randomElement()!
+        enum ThemeChoice {
+            case batman, tmnt, vehicles, holiday, harry, flags
+        }
+        func setTheme() {
+            switch themeChoice {
+            case .batman:
+                theme.name = "BATMAN"
+                theme.emojis = ["🦇", "🤡", "♦️", "🥶", "🐈‍⬛", "🐧", "🎭", "🥷🏼", "🌿", "💰", "🐦", "😱", "👊"]
+                theme.pairsOfCards = 13
+                theme.color = "#444444"
+            case .tmnt:
+                theme.name = "TMNT"
+                theme.emojis = ["🐢", "🐀", "🍕", "🧪", "🥷🏼", "⚔️", "🚃", "🏒", "✦"]
+                theme.pairsOfCards = 9
+                theme.color = "#00FF00"
+            case .vehicles:
+                theme.name = "VEHICLES"
+                theme.emojis = ["🚲", "🚂", "🚁", "🚜", "🚕", "🏎", "🚑", "🚓", "🚒", "✈️", "🚀", "⛵️", "🛸", "🛶", "🚌", "🏍", "🛺", "🚠", "🛵", "🚗", "🚚", "🚇", "🛻", "🚝"]
+                theme.pairsOfCards = 24
+                theme.color = "#0000FF"
+            case .holiday:
+                theme.name = "HOLIDAYS"
+                theme.emojis = ["🎉", "🎊", "🎁", "🎄", "🎃", "🎅🏻", "🎎", "🪔", "🧑🏼‍🎄", "🤶🏾"]
+                theme.pairsOfCards = 10
+                theme.color = "#FF0000"
+            case .harry:
+                theme.name = "HARRY POTTER"
+                theme.emojis = ["🧙🏼‍♀️", "🧙🏼", "🧙‍♂️", "🪄", "🚂", "🐍", "🏆", "🧹", "🐈‍⬛", "🐀", "🐺", "🦉", "🦄", "🐉", "🧪", "🕷", "🏰"]
+                theme.pairsOfCards = 17
+                theme.color = "#FFFF00"      // gold, marroon, green, blue, yellow
+            case .flags:
+                theme.name = "FLAGS"
+                theme.emojis = ["🏴‍☠️", "🏴", "🇺🇳", "🇦🇺", "🇧🇸", "🇦🇹", "🇨🇷", "🇪🇪", "🇯🇵", "🇹🇹", "🇺🇸", "🇾🇪", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "🇬🇧", "🇰🇼", "🇳🇴", "🇸🇦", "🇸🇩", "🏴󠁧󠁢󠁷󠁬󠁳󠁿", "🇹🇭", "🇰🇷", "🇷🇺", "🇩🇪", "🇫🇷", "🇨🇳", "🇨🇦", "🇲🇽", "🇵🇭", "🇮🇪", "🏴󠁧󠁢󠁳󠁣󠁴󠁿", "🇪🇸"]
+                theme.pairsOfCards = 28       // actually 31
+                theme.color = "#800080"
+            }
         }
     }
     
+
+    
     static func createMemoryGame() -> MemoryGame<String> {
-        MemoryGame<String>(numberOfPairsOfCards: theme.pairsOfCards) { pairIndex in
+        let theme = Theme()
+        return MemoryGame<String>(numberOfPairsOfCards: theme.pairsOfCards) { pairIndex in
             theme.emojis[pairIndex]
         }
     }

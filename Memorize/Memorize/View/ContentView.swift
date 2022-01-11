@@ -20,6 +20,10 @@ struct ContentView: View {
                         }
                 }
             }
+            Button("New Game") {
+                viewModel.setTheme()
+                createMemoryGame()
+            }
         }
         .foregroundColor(.red)
         .padding(.horizontal)
