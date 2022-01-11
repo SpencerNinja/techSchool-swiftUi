@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
     @StateObject var viewModel = EmojiMemoryGame()
+    
     var body: some View {
         ScrollView {
             Text(viewModel.theme.name)
@@ -21,9 +23,14 @@ struct ContentView: View {
                         }
                 }
             }
-            Button("New Game") {}
+            Button("New Game") {
+//                let randomThemeSize: Int = Themes.themes.count
+//                let randomThemeIndex: Int = Int.random(in: 0..<randomThemeSize)
+//                viewModel.theme = Themes.themes[randomThemeIndex]
+//                viewModel.theme.emojis = Themes.themes[randomThemeIndex].emojis
+            }
         }
-        .foregroundColor(.red)
+        .foregroundColor(Color(hex: viewModel.theme.color))
         .padding(.horizontal)
     }
 }
