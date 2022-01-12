@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
     
@@ -32,13 +33,24 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
             !cards[chosenIndex].isFaceUp,
             !cards[chosenIndex].isMatched
         {
+            print("1st card has been seen \(cards[chosenIndex].hasBeenSeen) times")
             if let potentialMatchIndex = indexOfTheOneAndOnlyFaceUpCard {
+                cards[chosenIndex].hasBeenSeen += 1
+                cards[potentialMatchIndex].hasBeenSeen += 1
+                print("2nd card has been seen \(cards[potentialMatchIndex].hasBeenSeen) times")
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
                     score += 2
+                    // don't minus two points if it is a match even if the cards have been seen
                 }
                 indexOfTheOneAndOnlyFaceUpCard = nil
+                if cards[chosenIndex].hasBeenSeen >= 2 {
+                    score -= 1
+                }
+                if cards[potentialMatchIndex].hasBeenSeen >= 2 {
+                    score -= 1
+                }
             } else {
                 for index in cards.indices {
                     cards[index].isFaceUp = false
@@ -55,6 +67,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         var isMatched: Bool = false
         var content: CardContent
         var id: Int
+        var hasBeenSeen: Int = 0
     }
     
 }

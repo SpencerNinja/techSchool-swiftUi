@@ -43,4 +43,8 @@ class EmojiMemoryGame: ObservableObject {
         self.model = Self.createMemoryGame(theme: theme)
     }
     
+    func getScore() -> Int {
+        model.score
+    }
+    
 }

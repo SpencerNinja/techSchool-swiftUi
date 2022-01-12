@@ -16,7 +16,7 @@ struct ContentView: View {
             HStack {
                 Text(viewModel.theme.name)
                 Spacer()
-                Text("Score: \()") // score
+                Text("Score: \(viewModel.getScore())") // score
             }
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                 ForEach(viewModel.cards) { card in
