@@ -24,10 +24,7 @@ struct ContentView: View {
                 }
             }
             Button("New Game") {
-//                let randomThemeSize: Int = Themes.themes.count
-//                let randomThemeIndex: Int = Int.random(in: 0..<randomThemeSize)
-//                viewModel.theme = Themes.themes[randomThemeIndex]
-//                viewModel.theme.emojis = Themes.themes[randomThemeIndex].emojis
+                viewModel.resetAndNewGame()
             }
         }
         .foregroundColor(Color(hex: viewModel.theme.color))
