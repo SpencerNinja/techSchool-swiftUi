@@ -42,13 +42,12 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
                     score += 2
-                    // don't minus two points if it is a match even if the cards have been seen
                 }
                 indexOfTheOneAndOnlyFaceUpCard = nil
-                if cards[chosenIndex].hasBeenSeen >= 2 {
+                if cards[chosenIndex].hasBeenSeen >= 2 && !cards[chosenIndex].isMatched {
                     score -= 1
                 }
-                if cards[potentialMatchIndex].hasBeenSeen >= 2 {
+                if cards[potentialMatchIndex].hasBeenSeen >= 2 && !cards[potentialMatchIndex].isMatched {
                     score -= 1
                 }
             } else {
