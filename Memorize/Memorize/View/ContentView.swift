@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var viewModel: EmojiMemoryGame
+    
+    @StateObject var viewModel = EmojiMemoryGame()
     
     var body: some View {
         ScrollView {
+            HStack {
+                Text(viewModel.theme.name)
+                Spacer()
+                Text("Score: \(viewModel.getScore())") // score
+            }
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
                 ForEach(viewModel.cards) { card in
                     CardView(card: card)
@@ -21,15 +27,18 @@ struct ContentView: View {
                         }
                 }
             }
+            Button("New Game") {
+                viewModel.resetAndNewGame()
+            }
         }
-        .foregroundColor(.red)
+        .foregroundColor(Color(hex: viewModel.theme.color))
         .padding(.horizontal)
     }
 }
 
+// What a card looks like
 struct CardView: View {
     let card: MemoryGame<String>.Card
-    
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20)
@@ -46,7 +55,7 @@ struct CardView: View {
     }
 }
 
-
+// Preview UI
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = EmojiMemoryGame()
