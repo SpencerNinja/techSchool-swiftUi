@@ -12,12 +12,35 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     
     private(set) var cards: Array<Card>
     
-    private var indexOfTheOneAndOnlyFaceUpCard: Int?
+    private var indexOfTheOneAndOnlyFaceUpCard: Int? {
+        get {
+            var faceUpCardIndices = [Int]()
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    faceUpCardIndices.append(index)
+                }
+            }
+            if faceUpCardIndices.count == 1 {
+                return faceUpCardIndices.first
+            } else {
+                return nil
+            }
+        }
+        set {
+            for index in cards.indices {
+                if index != newValue {
+                    cards[index].isFaceUp = false
+                } else {
+                    cards[index].isFaceUp = true
+                }
+            }
+        }
+    }
     
     var score: Int
     
     init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent) {
-        cards = Array<Card>()
+        cards = []
         // add numberOfPairsOfCards x 2 cards to cards array
         for pairIndex in 0..<numberOfPairsOfCards {
             let content: CardContent = createCardContent(pairIndex)
@@ -43,7 +66,8 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     cards[potentialMatchIndex].isMatched = true
                     score += 2
                 }
-                indexOfTheOneAndOnlyFaceUpCard = nil
+//                indexOfTheOneAndOnlyFaceUpCard = nil
+                cards[chosenIndex].isFaceUp = true
                 if cards[chosenIndex].hasBeenSeen >= 2 && !cards[chosenIndex].isMatched {
                     score -= 1
                 }
@@ -51,21 +75,17 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                     score -= 1
                 }
             } else {
-                for index in cards.indices {
-                    cards[index].isFaceUp = false
-                }
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
-            cards[chosenIndex].isFaceUp.toggle()
         }
         print("\(cards)")
     }
     
     struct Card: Identifiable {
-        var isFaceUp: Bool = false
-        var isMatched: Bool = false
-        var content: CardContent
-        var id: Int
+        var isFaceUp = false
+        var isMatched = false
+        let content: CardContent
+        let id: Int
         var hasBeenSeen: Int = 0
     }
     
