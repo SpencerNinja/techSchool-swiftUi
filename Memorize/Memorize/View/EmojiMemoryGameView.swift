@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  EmojiMemoryGameView.swift
 //  Memorize
 //
 //  Created by Spencer Hurd on 12/6/21.
@@ -7,38 +7,43 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct EmojiMemoryGameView: View {
     
-    @StateObject var viewModel = EmojiMemoryGame()
+    @StateObject var game = EmojiMemoryGame()
     
     var body: some View {
         ScrollView {
             HStack {
-                Text(viewModel.theme.name)
+                Text(game.theme.name)
                 Spacer()
-                Text("Score: \(viewModel.getScore())") // score
+                Text("Score: \(game.getScore())") // score
             }
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 65))]) {
-                ForEach(viewModel.cards) { card in
+                ForEach(game.cards) { card in
                     CardView(card: card)
                         .aspectRatio(2/3, contentMode: .fit)
                         .onTapGesture {
-                            viewModel.choose(card)
+                            game.choose(card)
                         }
                 }
             }
             Button("New Game") {
-                viewModel.resetAndNewGame()
+                game.resetAndNewGame()
             }
         }
-        .foregroundColor(Color(hex: viewModel.theme.color))
+        .foregroundColor(Color(hex: game.theme.color))
         .padding(.horizontal)
     }
 }
 
 // What a card looks like
 struct CardView: View {
-    let card: MemoryGame<String>.Card
+    let card: EmojiMemoryGame.Card
+    
+//    init(_ card: EmojiMemoryGame.Card) {
+//        self.card = card
+//    }
+    
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20)
@@ -59,9 +64,9 @@ struct CardView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         let game = EmojiMemoryGame()
-        ContentView(viewModel: game)
+        EmojiMemoryGameView(game: game)
             .preferredColorScheme(.dark)
-        ContentView(viewModel: game)
+        EmojiMemoryGameView(game: game)
             .preferredColorScheme(.light)
     }
 }
